@@ -61,12 +61,12 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x) {
 
 		## if input matrix is same as previous matrix, inverse will be present
-	    ## due to check done in set() above
-       	i <- x$getinverse()
+		## due to check done in set() above
+		i <- x$getinverse()
 		if(!is.null(i)) {
    	        message("getting cached inverse since matrix is same")
 		    return(i)
-       	}
+		}
 
 		## If we are here, there was no previous inverse cached,
 		## so compute matrix inverse of the given input matrix, 
