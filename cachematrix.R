@@ -12,13 +12,13 @@
 makeCacheMatrix <- function(x = matrix()) {
 
 		## create 'i' to cache the inverse
-        i <- NULL
+		i <- NULL
 
 		## 'set' function to store the input matrix into x
 		## Additionally, while set(), check that new matrix is different from previous,
 		##	if they are same, then no need to set here.
 
-        set <- function(y) {
+		set <- function(y) {
 
 			## if there's previously stored matrix, check if it is same as current input
 			if (!is.null(x) & identical(x,y))
@@ -29,27 +29,27 @@ makeCacheMatrix <- function(x = matrix()) {
 			else
 			{
 				message("setting the matrix since it's different")
-                x <<- y
-                i <<- NULL
+		        x <<- y
+		        i <<- NULL
 			}
-        }
+		}
 
 		## 'get' function to retrieve the previously stored matrix
-        get <- function() x
+		get <- function() x
 
 		## 'setinverse' function to store inverse of matrix, this also uses
 		##	the <<- operator, so inverse will be stored in variable 'i' searched
 		#	for in enclosing environments
-        setinverse <- function(inverse) i <<- inverse
+		setinverse <- function(inverse) i <<- inverse
 
 		## 'getinverse' function to retrieve the previously stored inverse
-        getinverse <- function() i
+		getinverse <- function() i
 
 		## returns a list of the set, get, setinverse, getinverse functions as 
 		## output of makeCacheMatrix() function
-        list(set = set, get = get,
-             setinverse = setinverse,
-             getinverse = getinverse)
+		list(set = set, get = get,
+		     setinverse = setinverse,
+		     getinverse = getinverse)
 
 }
 
@@ -63,15 +63,15 @@ cacheSolve <- function(x) {
 		## if input matrix is same as previous matrix, inverse will be present
 	    ## due to check done in set() above
        	i <- x$getinverse()
-        if(!is.null(i)) {
+		if(!is.null(i)) {
    	        message("getting cached inverse since matrix is same")
-            return(i)
+		    return(i)
        	}
 
 		## If we are here, there was no previous inverse cached,
 		## so compute matrix inverse of the given input matrix, 
 		## and store the inverse for future use.
 		inverse <- solve(x$get())		## computes inverse using solve()
-        x$setinverse(inverse)	## save inverse
-        inverse					## return inverse as output of cacheSolve() function
+		x$setinverse(inverse)	## save inverse
+		inverse					## return inverse as output of cacheSolve() function
 }
